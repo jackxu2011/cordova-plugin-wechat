@@ -139,12 +139,9 @@ public class Wechat extends CordovaPlugin {
      * @return
      */
     public static IWXAPI getWxAPI(Context ctx) {
+        
         if (wxAPI == null) {
-            String appId = getSavedAppId(ctx);
-
-            if (!appId.isEmpty()) {
-                wxAPI = WXAPIFactory.createWXAPI(ctx, appId, true);
-            }
+            wxAPI = WXAPIFactory.createWXAPI(ctx, null);
         }
 
         return wxAPI;
@@ -286,6 +283,8 @@ public class Wechat extends CordovaPlugin {
             return true;
         }
 
+        final IWXAPI api = getWxAPI(cordova.getActivity());
+
         PayReq req = new PayReq();
 
         try {
@@ -296,6 +295,7 @@ public class Wechat extends CordovaPlugin {
                 if(!appid.equals(paramAppid)) {
                     appid = paramAppid;
                     this.saveAppId(cordova.getActivity(), appid);
+                    api.registerApp(appid);
                 }
             }
             req.appId = appid;
@@ -311,8 +311,6 @@ public class Wechat extends CordovaPlugin {
             callbackContext.error(ERROR_INVALID_PARAMETERS);
             return true;
         }
-
-        final IWXAPI api = getWxAPI(cordova.getActivity());
 
         if (api.sendReq(req)) {
             Log.i(TAG, "Payment request has been sent successfully.");
