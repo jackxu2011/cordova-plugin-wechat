@@ -14,7 +14,8 @@ module.exports = {
         IMAGE:   4,
         MUSIC:   5,
         VIDEO:   6,
-        WEBPAGE: 7
+        WEBPAGE: 7,
+        MINI:9
     },
 
     isInstalled: function (onSuccess, onError) {
@@ -33,8 +34,9 @@ module.exports = {
      *        mediaTagName: "Media Tag Name(optional)",
      *        thumb: "http://YOUR_THUMBNAIL_IMAGE",
      *        media: {
-     *            type: Wechat.Type.WEBPAGE,   // webpage
+     *            type: Wechat.Type.MINI,   // webpage
      *            webpageUrl: "https://github.com/xu-li/cordova-plugin-wechat"    // webpage
+     *            url:""
      *        }
      *    },
      *    scene: Wechat.Scene.TIMELINE   // share to Timeline

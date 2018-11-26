@@ -4,23 +4,17 @@
 
 A cordova plugin, a JS version of Wechat SDK
 
-# Warning
-
-This repository is no longer supported. I am sorry for any frustration when using this plugin. If you are willing to be a maintainer, please send me a message.
-
-这个插件不再维护了。如果给你带来任何问题，我很抱歉。如果你想成为维护者，请给我发个消息。
-
 # Feature
 
 Share title, description, image, and link to wechat moment(朋友圈)，choose invoice from Wechat list
 
-# Example
+can share screenshot image for ios and android
 
-See [cordova-plugin-wechat-example](https://github.com/xu-li/cordova-plugin-wechat-example)
 
 # Install
 
-1. ```cordova plugin add cordova-plugin-wechat  --variable wechatappid=YOUR_WECHAT_APPID```, or using [plugman](https://npmjs.org/package/plugman), [phonegap](https://npmjs.org/package/phonegap), [ionic](http://ionicframework.com/)
+1. ```
+cordova plugin add https://github.com/jackxu2011/cordova-plugin-wechat.git  --variable wechatappid=YOUR_WECHAT_APPID```, or using [plugman](https://npmjs.org/package/plugman), [phonegap](https://npmjs.org/package/phonegap), [ionic](http://ionicframework.com/)
 
 2. ```cordova build ios``` or ```cordova build android```
 
@@ -134,21 +128,6 @@ Wechat.chooseInvoiceFromWX(data,function(data){
 })
 ```
 
-# FAQ
-
-See [FAQ](https://github.com/xu-li/cordova-plugin-wechat/wiki/FAQ).
-
-# TODO
-
-1. ~~Add android version~~
-
-2. ~~Share to wechat session(聊天) and wechat favorite(收藏)~~
-
-3. ~~Add other media types, including music etc.~~
-
-4. ~~Other APIs~~
-
-5. ~~Android Version update~~
 
 # LICENSE
 

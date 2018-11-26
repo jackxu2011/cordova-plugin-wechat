@@ -17,7 +17,9 @@ enum  CDVWechatSharingType {
     CDVWXSharingTypeImage,
     CDVWXSharingTypeMusic,
     CDVWXSharingTypeVideo,
-    CDVWXSharingTypeWebPage
+    CDVWXSharingTypeWebPage,
+    CDVWXSharingTypeText,
+    CDVWXSharingTypeMini
 };
 
 @interface CDVWechat:CDVPlugin <WXApiDelegate>

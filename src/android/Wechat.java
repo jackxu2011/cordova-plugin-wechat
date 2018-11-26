@@ -88,6 +88,8 @@ public class Wechat extends CordovaPlugin {
     public static final int TYPE_WECHAT_SHARING_VIDEO = 6;
     public static final int TYPE_WECHAT_SHARING_WEBPAGE = 7;
     public static final int TYPE_WECHAT_SHARING_TEXT = 8;
+    public static final int TYPE_WECHAT_SHARING_MINI = 9;
+
 
     public static final int SCENE_SESSION = 0;
     public static final int SCENE_TIMELINE = 1;
@@ -450,7 +452,14 @@ public class Wechat extends CordovaPlugin {
                     videoObject.videoUrl = media.getString(KEY_ARG_MESSAGE_MEDIA_VIDEOURL);
                     mediaObject = videoObject;
                     break;
-
+                case TYPE_WECHAT_SHARING_MINI:
+                    WXMiniProgramObject miniProgramObj = new WXMiniProgramObject();
+                    miniProgramObj.webpageUrl = media.getString(KEY_ARG_MESSAGE_MEDIA_WEBPAGEURL);
+                    miniProgramObj.miniprogramType = WXMiniProgramObject.MINIPTOGRAM_TYPE_RELEASE;
+                    miniProgramObj.userName = "gh_6a87af9d2e43";
+                    miniProgramObj.path = media.getString(KEY_ARG_MESSAGE_MEDIA_URL);
+                    mediaObject = miniProgramObj;
+                    break;
                 case TYPE_WECHAT_SHARING_WEBPAGE:
                 default:
                     mediaObject = new WXWebpageObject(media.getString(KEY_ARG_MESSAGE_MEDIA_WEBPAGEURL));
