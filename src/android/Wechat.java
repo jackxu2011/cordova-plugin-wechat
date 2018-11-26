@@ -80,6 +80,8 @@ public class Wechat extends CordovaPlugin {
     public static final String KEY_ARG_MESSAGE_MEDIA_EMOTION = "emotion";
     public static final String KEY_ARG_MESSAGE_MEDIA_EXTINFO = "extInfo";
     public static final String KEY_ARG_MESSAGE_MEDIA_URL = "url";
+    public static final String KEY_ARG_MESSAGE_MEDIA_PATH = "path";
+    public static final String KEY_ARG_MESSAGE_MEDIA_USERNAME = "userName";
 
     public static final int TYPE_WECHAT_SHARING_APP = 1;
     public static final int TYPE_WECHAT_SHARING_EMOTION = 2;
@@ -88,8 +90,9 @@ public class Wechat extends CordovaPlugin {
     public static final int TYPE_WECHAT_SHARING_MUSIC = 5;
     public static final int TYPE_WECHAT_SHARING_VIDEO = 6;
     public static final int TYPE_WECHAT_SHARING_WEBPAGE = 7;
-    public static final int TYPE_WECHAT_SHARING_TEXT = 8;
-    public static final int TYPE_WECHAT_SHARING_MINI = 9;
+    public static final int TYPE_WECHAT_SHARING_MINI = 8;
+    public static final int TYPE_WECHAT_SHARING_TEXT = 9;
+    
 
 
     public static final int SCENE_SESSION = 0;
@@ -283,7 +286,7 @@ public class Wechat extends CordovaPlugin {
 
         try {
             final String appid = params.getString("appid");
-            final String savedAppid = getAppId(cordova.getActivity());
+            final String savedAppid = getSavedAppId(cordova.getActivity());
             if (!savedAppid.equals(appid)) {
                 this.saveAppId(cordova.getActivity(), appid);
             }
@@ -457,8 +460,8 @@ public class Wechat extends CordovaPlugin {
                     WXMiniProgramObject miniProgramObj = new WXMiniProgramObject();
                     miniProgramObj.webpageUrl = media.getString(KEY_ARG_MESSAGE_MEDIA_WEBPAGEURL);
                     miniProgramObj.miniprogramType = WXMiniProgramObject.MINIPTOGRAM_TYPE_RELEASE;
-                    miniProgramObj.userName = "gh_6a87af9d2e43";
-                    miniProgramObj.path = media.getString(KEY_ARG_MESSAGE_MEDIA_URL);
+                    miniProgramObj.userName = media.getString(KEY_ARG_MESSAGE_MEDIA_USERNAME);
+                    miniProgramObj.path = media.getString(KEY_ARG_MESSAGE_MEDIA_PATH);
                     mediaObject = miniProgramObj;
                     break;
                 case TYPE_WECHAT_SHARING_WEBPAGE:

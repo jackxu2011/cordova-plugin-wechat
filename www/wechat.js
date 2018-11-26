@@ -15,7 +15,7 @@ module.exports = {
         MUSIC:   5,
         VIDEO:   6,
         WEBPAGE: 7,
-        MINI:9
+        MINI:    8
     },
 
     isInstalled: function (onSuccess, onError) {
@@ -33,10 +33,17 @@ module.exports = {
      *        description: "Message Description(optional)",
      *        mediaTagName: "Media Tag Name(optional)",
      *        thumb: "http://YOUR_THUMBNAIL_IMAGE",
+     *        //webPage
      *        media: {
-     *            type: Wechat.Type.MINI,   // webpage
-     *            webpageUrl: "https://github.com/xu-li/cordova-plugin-wechat"    // webpage
-     *            url:""
+     *            type: Wechat.Type.WEBPAGE,
+     *            webpageUrl: "https://github.com/xu-li/cordova-plugin-wechat"
+     *        }
+     *        //微信小程序
+     *        media: {
+     *            type: Wechat.Type.MINI,
+     *            webpageUrl: "https://github.com/xu-li/cordova-plugin-wechat", // 兼容低版本的网页链接
+     *            path:"", //小程序页面路径
+     *            userName: '""  // 小程序原始id
      *        }
      *    },
      *    scene: Wechat.Scene.TIMELINE   // share to Timeline

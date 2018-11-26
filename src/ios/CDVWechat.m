@@ -436,8 +436,8 @@ static int const MAX_THUMBNAIL_SIZE = 320;
         case CDVWXSharingTypeMini:
             mediaObject = [WXMiniProgramObject object];
             ((WXMiniProgramObject*)mediaObject).webpageUrl = [media objectForKey:@"webpageUrl"];
-            ((WXMiniProgramObject*)mediaObject).userName = @"gh_6a87af9d2e43";
-            ((WXMiniProgramObject*)mediaObject).path = [media objectForKey:@"url"];
+            ((WXMiniProgramObject*)mediaObject).userName = [media objectForKey:@"userName"];
+            ((WXMiniProgramObject*)mediaObject).path = [media objectForKey:@"path"];
             break;
         case CDVWXSharingTypeWebPage:
         default:
