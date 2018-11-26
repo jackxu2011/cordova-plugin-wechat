@@ -141,7 +141,10 @@ public class Wechat extends CordovaPlugin {
     public static IWXAPI getWxAPI(Context ctx) {
         
         if (wxAPI == null) {
-            wxAPI = WXAPIFactory.createWXAPI(ctx, null);
+            String id = getInitAppId();
+            if(id != null) {
+                wxAPI = WXAPIFactory.createWXAPI(ctx, null);
+            }
         }
 
         return wxAPI;
@@ -153,13 +156,17 @@ public class Wechat extends CordovaPlugin {
 
         if (action.equals("share")) {
             return share(args, callbackContext);
-        } else if (action.equals("sendAuthRequest")) {
+        } 
+        if (action.equals("sendAuthRequest")) {
             return sendAuthRequest(args, callbackContext);
-        } else if (action.equals("sendPaymentRequest")) {
+        } 
+        if (action.equals("sendPaymentRequest")) {
             return sendPaymentRequest(args, callbackContext);
-        } else if (action.equals("isWXAppInstalled")) {
+        } 
+        if (action.equals("isWXAppInstalled")) {
             return isInstalled(callbackContext);
-        }else if (action.equals("chooseInvoiceFromWX")){
+        }
+        if (action.equals("chooseInvoiceFromWX")){
             return chooseInvoiceFromWX(args, callbackContext);
         }
 
@@ -312,17 +319,24 @@ public class Wechat extends CordovaPlugin {
             return true;
         }
 
-        if (api.sendReq(req)) {
-            Log.i(TAG, "Payment request has been sent successfully.");
+        cordova.getActivity().runOnUiThread(new Runnable() {
+             @Override
+             public void run() {
 
-            // send no result
-            sendNoResultPluginResult(callbackContext);
-        } else {
-            Log.i(TAG, "Payment request has been sent unsuccessfully.");
+                 if (api.sendReq(req)) {
+                     Log.i(TAG, "Payment request has been sent successfully.");
 
-            // send error
-            callbackContext.error(ERROR_SEND_REQUEST_FAILED);
-        }
+                     // send no result
+                     sendNoResultPluginResult(callbackContext);
+                 } else {
+                     Log.i(TAG, "Payment request has been sent unsuccessfully.");
+
+                     // send error
+                     callbackContext.error(ERROR_SEND_REQUEST_FAILED);
+                 }
+
+             }
+        });
 
         return true;
     }
@@ -559,9 +573,6 @@ public class Wechat extends CordovaPlugin {
 
     /**
      * compress bitmap by quility
-     *
-     * @param url
-     * @return
      */    
     protected  Bitmap compressImage(Bitmap image,Integer maxSize) {
 
