@@ -139,11 +139,11 @@ static int const MAX_THUMBNAIL_SIZE = 320;
     NSArray *requiredParams;
     if ([params objectForKey:@"mch_id"])
     {
-        requiredParams = @[@"mch_id", @"prepay_id", @"timestamp", @"nonce", @"sign", @"appid"];
+        requiredParams = @[@"mch_id", @"prepay_id", @"timestamp", @"nonce", @"sign"];
     }
     else
     {
-        requiredParams = @[@"partnerid", @"prepayid", @"timestamp", @"noncestr", @"sign", @"appid"];
+        requiredParams = @[@"partnerid", @"prepayid", @"timestamp", @"noncestr", @"sign"];
     }
 
     for (NSString *key in requiredParams)
@@ -157,8 +157,12 @@ static int const MAX_THUMBNAIL_SIZE = 320;
 
     PayReq *req = [[PayReq alloc] init];
 
-    NSString *appId = [params objectForKey:requiredParams[5]];
-    if (appId && ![appId isEqualToString:self.wechatAppId]) {
+    NSString *appId = self.wechatAppId;
+    if([params objectForKey:@"appid"]) {
+        appId = [params objectForKey:@"appid"]
+    }
+
+    if (![appId isEqualToString:self.wechatAppId]) {
         self.wechatAppId = appId;
         [WXApi registerApp: appId];
     }
