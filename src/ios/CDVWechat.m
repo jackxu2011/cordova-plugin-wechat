@@ -136,15 +136,7 @@ static int const MAX_THUMBNAIL_SIZE = 320;
     }
 
     // check required parameters
-    NSArray *requiredParams;
-    if ([params objectForKey:@"mch_id"])
-    {
-        requiredParams = @[@"mch_id", @"prepay_id", @"timestamp", @"nonce", @"sign"];
-    }
-    else
-    {
-        requiredParams = @[@"partnerid", @"prepayid", @"timestamp", @"noncestr", @"sign"];
-    }
+    NSArray *requiredParams @[@"partnerid", @"prepayid", @"timestamp", @"noncestr", @"sign", @"package"];
 
     for (NSString *key in requiredParams)
     {
@@ -171,8 +163,8 @@ static int const MAX_THUMBNAIL_SIZE = 320;
     req.prepayId = [params objectForKey:requiredParams[1]];
     req.timeStamp = [[params objectForKey:requiredParams[2]] intValue];
     req.nonceStr = [params objectForKey:requiredParams[3]];
-    req.package = @"Sign=WXPay";
     req.sign = [params objectForKey:requiredParams[4]];
+    req.package = [params objectForKey:requiredParams[5]];
 
     if ([WXApi sendReq:req])
     {

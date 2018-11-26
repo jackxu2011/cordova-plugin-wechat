@@ -306,12 +306,12 @@ public class Wechat extends CordovaPlugin {
                 }
             }
             req.appId = appid;
-            req.partnerId = params.has("mch_id") ? params.getString("mch_id") : params.getString("partnerid");
-            req.prepayId = params.has("prepay_id") ? params.getString("prepay_id") : params.getString("prepayid");
-            req.nonceStr = params.has("nonce") ? params.getString("nonce") : params.getString("noncestr");
+            req.partnerId = params.getString("partnerid");
+            req.prepayId = params.getString("prepayid");
+            req.nonceStr = params.getString("noncestr");
             req.timeStamp = params.getString("timestamp");
             req.sign = params.getString("sign");
-            req.packageValue = "Sign=WXPay";
+            req.packageValue = params.getString("package");
         } catch (Exception e) {
             Log.e(TAG, e.getMessage());
 
