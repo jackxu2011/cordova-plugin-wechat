@@ -20,6 +20,7 @@ import com.tencent.mm.opensdk.modelmsg.WXMusicObject;
 import com.tencent.mm.opensdk.modelmsg.WXTextObject;
 import com.tencent.mm.opensdk.modelmsg.WXVideoObject;
 import com.tencent.mm.opensdk.modelmsg.WXWebpageObject;
+import com.tencent.mm.opensdk.modelmsg.WXMiniProgramObject;
 import com.tencent.mm.opensdk.modelpay.PayReq;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
@@ -99,7 +100,7 @@ public class Wechat extends CordovaPlugin {
 
     protected static CallbackContext currentCallbackContext;
     protected static IWXAPI wxAPI;
-    protected static String appId;
+    protected String appId;
 
     @Override
     protected void pluginInitialize() {
@@ -635,7 +636,7 @@ public class Wechat extends CordovaPlugin {
         return null;
     }
 
-    public static String getAppId() {
+    public String getAppId() {
         if (appId == null) {
             appId = preferences.getString(WXAPPID_PROPERTY_KEY, "");
         }
