@@ -105,12 +105,16 @@ public class Wechat extends CordovaPlugin {
     protected static IWXAPI wxAPI;
     protected String appId;
 
+    protected static String initAppId;
+
     @Override
     protected void pluginInitialize() {
 
         super.pluginInitialize();
 
         String id = getAppId();
+
+        initAppId = id;
 
         // save app id
         saveAppId(cordova.getActivity(), id);
@@ -637,6 +641,10 @@ public class Wechat extends CordovaPlugin {
         }
 
         return null;
+    }
+
+    public static String getInitAppId() {
+        return initAppId;
     }
 
     public String getAppId() {
