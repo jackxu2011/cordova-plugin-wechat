@@ -1,9 +1,9 @@
 {
-  "name": "@jackxu2011/cordova-plugin-wechat",
-  "version": "2.2.2",
+  "name": "cordova-plugin-wechat2",
+  "version": "2.2.0",
   "description": "A cordova plugin, a JS version of Wechat SDK,can share screenshot image",
   "cordova": {
-    "id": "cordova-plugin-wechat",
+    "id": "cordova-plugin-wechat2",
     "platforms": [
       "ios",
       "android"
