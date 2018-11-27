@@ -136,7 +136,7 @@ static int const MAX_THUMBNAIL_SIZE = 320;
     }
 
     // check required parameters
-    NSArray *requiredParams @[@"partnerid", @"prepayid", @"timestamp", @"noncestr", @"sign", @"package"];
+    NSArray *requiredParams = @[@"partnerid", @"prepayid", @"timestamp", @"noncestr", @"sign", @"package"];
 
     for (NSString *key in requiredParams)
     {
@@ -151,7 +151,7 @@ static int const MAX_THUMBNAIL_SIZE = 320;
 
     NSString *appId = self.wechatAppId;
     if([params objectForKey:@"appid"]) {
-        appId = [params objectForKey:@"appid"]
+        appId = [params objectForKey:@"appid"];
     }
 
     if (![appId isEqualToString:self.wechatAppId]) {
@@ -252,7 +252,7 @@ static int const MAX_THUMBNAIL_SIZE = 320;
         return ;
     }
 
-    NSURL *formatUrl = [NSURL URLWithString:[url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    NSURL *formatUrl = [NSURL URLWithString:[url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]];
     if ([[UIApplication sharedApplication] canOpenURL:formatUrl]) {
         [[UIApplication sharedApplication] openURL:formatUrl];
     } else{
