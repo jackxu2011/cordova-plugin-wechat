@@ -92,6 +92,26 @@ Wechat.share({
 });
 ```
 
+### Share miniProgram
+```Javascript
+Wechat.share({
+    message: {
+        ...
+        media: {
+            type: Wechat.Type.MINI,
+            webpageUrl: "https://github.com/xu-li/cordova-plugin-wechat", // 兼容低版本的网页链接
+            path:"", //小程序页面路径
+            userName: ""  // 小程序原始id
+        }
+    },
+    scene: Wechat.Scene.TIMELINE   // share to Timeline
+}, function () {
+    alert("Success");
+}, function (reason) {
+    alert("Failed: " + reason);
+});
+```
+
 ## Send payment request
 ```Javascript
 // See https://github.com/xu-li/cordova-plugin-wechat-example/blob/master/server/payment_demo.php for php demo
