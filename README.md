@@ -13,8 +13,7 @@ can share screenshot image for ios and android
 
 # Install
 
-1. ```
-cordova plugin add https://github.com/jackxu2011/cordova-plugin-wechat.git  --variable wechatappid=YOUR_WECHAT_APPID```, or using [plugman](https://npmjs.org/package/plugman), [phonegap](https://npmjs.org/package/phonegap), [ionic](http://ionicframework.com/)
+1. ```cordova plugin add @jackxu2011/cordova-plugin-wechat --variable wechatappid=YOUR_WECHAT_APPID```, or using [plugman](https://npmjs.org/package/plugman), [phonegap](https://npmjs.org/package/phonegap), [ionic](http://ionicframework.com/)
 
 2. ```cordova build ios``` or ```cordova build android```
 
