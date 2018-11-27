@@ -21,6 +21,9 @@ import org.json.JSONObject;
 
 import xu.li.cordova.wechat.Wechat;
 
+/**
+ * Created by xu.li<AthenaLightenedMyPath@gmail.com> on 9/1/15.
+ */
 public class EntryActivity extends Activity implements IWXAPIEventHandler {
 
     @Override
@@ -90,11 +93,9 @@ public class EntryActivity extends Activity implements IWXAPIEventHandler {
                 ctx.error(Wechat.ERROR_WECHAT_RESPONSE_UNSUPPORT);
                 break;
             case BaseResp.ErrCode.ERR_COMM:
-                Log.i(Wechat.TAG, resp.errStr);
                 ctx.error(Wechat.ERROR_WECHAT_RESPONSE_COMMON);
                 break;
             default:
-                Log.i(Wechat.TAG, resp.errStr);
                 ctx.error(Wechat.ERROR_WECHAT_RESPONSE_UNKNOWN);
                 break;
         }

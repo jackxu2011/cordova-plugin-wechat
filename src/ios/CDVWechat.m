@@ -286,7 +286,6 @@ static int const MAX_THUMBNAIL_SIZE = 320;
             break;
 
         case WXErrCodeCommon:
-            NSLog(@"cordova-plugin-wechat common errMsg: %@.", resp.errMsg);
             message = @"普通错误";
             break;
 
@@ -307,7 +306,6 @@ static int const MAX_THUMBNAIL_SIZE = 320;
             break;
 
         default:
-            NSLog(@"cordova-plugin-wechat unkonw errMsg: %@.", resp.errMsg);
             message = @"未知错误";
     }
 
