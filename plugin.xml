@@ -11,7 +11,7 @@
     <preference name="WECHATAPPID" />
     <!-- js module-->
     <js-module src="www/wechat.js" name="Wechat">
-      <clobbers target="Wechat" />
+        <clobbers target="Wechat" />
     </js-module>
     <engines>
       <engine name="cordova" version=">=7.1.0" />
@@ -55,8 +55,7 @@
         <header-file src="src/ios/CDVWechat.h" />
         <source-file src="src/ios/CDVWechat.m" />
         <!-- Wechat Official -->
-        <framework src="WechatOpenSDK" type="podspec" spec=""/>
-
+        <framework src="WechatOpenSDK" type="podspec" spec="" />
     </platform>
     <!-- android -->
     <platform name="android">

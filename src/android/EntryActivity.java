@@ -18,12 +18,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-
 import xu.li.cordova.wechat.Wechat;
 
-/**
- * Created by xu.li<AthenaLightenedMyPath@gmail.com> on 9/1/15.
- */
 public class EntryActivity extends Activity implements IWXAPIEventHandler {
 
     @Override
@@ -98,17 +94,6 @@ public class EntryActivity extends Activity implements IWXAPIEventHandler {
             default:
                 ctx.error(Wechat.ERROR_WECHAT_RESPONSE_UNKNOWN);
                 break;
-        }
-
-        // restore appid
-        final String appid = Wechat.getInitAppId();
-        final String savedAppId = Wechat.getSavedAppId(this);
-        if (!savedAppId.equals(appid)) {
-            Wechat.saveAppId(this, Wechat.getInitAppId());
-            IWXAPI api = Wechat.getWxAPI(this);
-            if(api != null) {
-                api.registerApp(Wechat.getInitAppId());
-            }
         }
 
         finish();

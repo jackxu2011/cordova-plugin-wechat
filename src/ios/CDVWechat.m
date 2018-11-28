@@ -155,8 +155,8 @@ static int const MAX_THUMBNAIL_SIZE = 320;
     }
 
     if (![appId isEqualToString:self.wechatAppId]) {
-        self.wechatAppId = appId;
-        [WXApi registerApp: appId];
+        [self failWithCallbackID:command.callbackId withMessage:@"传入appid与应用注册appid不一致"];
+        return ;
     }
 
     req.partnerId = [params objectForKey:requiredParams[0]];
@@ -320,36 +320,29 @@ static int const MAX_THUMBNAIL_SIZE = 320;
                          @"state": authResp.state != nil ? authResp.state : @"",
                          @"lang": authResp.lang != nil ? authResp.lang : @"",
                          @"country": authResp.country != nil ? authResp.country : @"",
-                         };
+                        };
 
             CDVPluginResult *commandResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary:response];
 
             [self.commandDelegate sendPluginResult:commandResult callbackId:self.currentCallbackId];
         }
-        else if([resp isKindOfClass:[WXChooseInvoiceResp class]]){
-                    WXChooseInvoiceResp* invoiceResp = (WXChooseInvoiceResp *)resp;
-
-        //            response = @{
-        //                         @"data":invoiceResp.cardAry
-        //                         }
-                    NSMutableArray *arrM = [[NSMutableArray alloc] init];
-                    NSDictionary *mutableDic = nil;
-                    for(WXInvoiceItem *invoiceItem in invoiceResp.cardAry){
-                        mutableDic = @{
-                                       @"cardId": invoiceItem.cardId,
-                                       @"encryptCode": invoiceItem.encryptCode,
-                                       };
-                        [arrM addObject:mutableDic];
-                    }
-                    response = @{
-                                 @"data": arrM
-                                 };
-                    NSLog(@"response======= %@", response);
-                    CDVPluginResult *commandResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary:response];
-                    [self.commandDelegate sendPluginResult:commandResult callbackId:self.currentCallbackId];
-                }
-        else
-        {
+        else if([resp isKindOfClass:[WXChooseInvoiceResp class]]) {
+            WXChooseInvoiceResp* invoiceResp = (WXChooseInvoiceResp *)resp;
+            NSMutableArray *arrM = [[NSMutableArray alloc] init];
+            NSDictionary *mutableDic = nil;
+            for(WXInvoiceItem *invoiceItem in invoiceResp.cardAry){
+                mutableDic = @{
+                               @"cardId": invoiceItem.cardId,
+                               @"encryptCode": invoiceItem.encryptCode,
+                            };
+                [arrM addObject:mutableDic];
+            }
+            response = @{ @"data": arrM };
+            NSLog(@"response======= %@", response);
+            CDVPluginResult *commandResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary:response];
+            [self.commandDelegate sendPluginResult:commandResult callbackId:self.currentCallbackId];
+        } 
+        else {
             [self successWithCallbackID:self.currentCallbackId];
         }
     }
@@ -358,7 +351,6 @@ static int const MAX_THUMBNAIL_SIZE = 320;
         [self failWithCallbackID:self.currentCallbackId withMessage:message];
     }
 
-    [self pluginInitialize];
     self.currentCallbackId = nil;
 }
 

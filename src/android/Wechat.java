@@ -52,6 +52,7 @@ public class Wechat extends CordovaPlugin {
 
     public static final String ERROR_WECHAT_NOT_INSTALLED = "未安装微信";
     public static final String ERROR_INVALID_PARAMETERS = "参数格式错误";
+    public static final String ERROR_APPID_MISMATCH = "请求appid与应用注册appid不一致";
     public static final String ERROR_SEND_REQUEST_FAILED = "发送请求失败";
     public static final String ERROR_WECHAT_RESPONSE_COMMON = "普通错误";
     public static final String ERROR_WECHAT_RESPONSE_USER_CANCEL = "用户点击取消并返回";
@@ -105,16 +106,12 @@ public class Wechat extends CordovaPlugin {
     protected static IWXAPI wxAPI;
     protected String appId;
 
-    protected static String initAppId;
-
     @Override
     protected void pluginInitialize() {
 
         super.pluginInitialize();
 
         String id = getAppId();
-
-        initAppId = id;
 
         // save app id
         saveAppId(cordova.getActivity(), id);
@@ -141,10 +138,7 @@ public class Wechat extends CordovaPlugin {
     public static IWXAPI getWxAPI(Context ctx) {
         
         if (wxAPI == null) {
-            String id = getInitAppId();
-            if(id != null) {
-                wxAPI = WXAPIFactory.createWXAPI(ctx, null);
-            }
+            wxAPI = WXAPIFactory.createWXAPI(ctx, null);
         }
 
         return wxAPI;
@@ -298,11 +292,9 @@ public class Wechat extends CordovaPlugin {
             String appid = getAppId();
             if(params.has("appid")) {
                 final String paramAppid = params.getString("appid");
-
                 if(!appid.equals(paramAppid)) {
-                    appid = paramAppid;
-                    this.saveAppId(cordova.getActivity(), appid);
-                    api.registerApp(appid);
+                    callbackContext.error(ERROR_APPID_MISMATCH);
+                    return true;
                 }
             }
             req.appId = appid;
@@ -653,10 +645,6 @@ public class Wechat extends CordovaPlugin {
         }
 
         return null;
-    }
-
-    public static String getInitAppId() {
-        return initAppId;
     }
 
     public String getAppId() {
